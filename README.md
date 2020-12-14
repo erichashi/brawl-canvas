@@ -1,7 +1,7 @@
 # Brawl
 
 Controle com as setas do teclado.  
-Clique SPACE lutar.  
+Clique SPACE para atacar.  
 Clique ENTER para começar e pausar.  
 
 ![alt text](https://github.com/abac-axi/brawl-canvas/blob/main/game.png?raw=true)
