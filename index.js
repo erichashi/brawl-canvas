@@ -2,6 +2,12 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const body = document.querySelector('body');
 
+const bg = document.getElementById('bg');
+
+const groundleft = document.getElementById('groundleft');
+const groundcenter = document.getElementById('groundcenter');
+const groundright = document.getElementById('groundright');
+
 
 // Set width and heights
 canvas.width = body.clientWidth <= 800 ? Math.floor(body.clientWidth/1.28) : 800;
@@ -14,7 +20,7 @@ let pause = true;
 //Cuidado! Trocar esse valores pode resultar em bugs
 const TIMETORESPAWN = 200;
 
-const PLAYERCOLOR = 'orange'
+const PLAYERCOLOR = 'Purple'
 const ENEMYCOLOR = 'green'
 
 
@@ -22,6 +28,9 @@ const BOUNDS = Math.floor(canvas.width/10)
 
 const GROUNDSPACES = Math.floor(canvas.width/8);
 const GROUNDHEIGHT = Math.floor(canvas.height-canvas.height/3);
+
+const NUMBLOCKS = 8;
+const BLOCKSIZE = Math.floor((canvas.width - GROUNDSPACES*2) / NUMBLOCKS);
 
 const FIGHTERSSIZE = Math.floor(canvas.width/40);
 const NUMPARTICLES = 50;
@@ -97,10 +106,22 @@ function touchGround(x, y, vel, radius){
     return (
         y + radius + vel.y  >= GROUNDHEIGHT &&
         y - radius <= GROUNDHEIGHT &&
-        x - radius >= (GROUNDSPACES/2) &&
-        x + radius <= canvas.width - (GROUNDSPACES/2))
+        x + radius >= GROUNDSPACES &&
+        x - radius <= canvas.width - GROUNDSPACES)
 }
 
+
+function Ground(x, y, img){
+    this.x = x;
+    this.y = y;
+    this.img = img;
+
+    this.draw = () => {
+        ctx.beginPath();
+        ctx.drawImage(this.img, this.x, this.y, BLOCKSIZE, BLOCKSIZE);
+        ctx.closePath();
+    }
+}
 
 //Helper
 function writeTextCanvas(text, x, y, color, size){
@@ -110,18 +131,19 @@ function writeTextCanvas(text, x, y, color, size){
 }
 
 
-function drawGround(){
-    ctx.beginPath();
-    ctx.fillStyle = 'black'
-    ctx.fillRect(GROUNDSPACES, GROUNDHEIGHT, canvas.width - (GROUNDSPACES*2), GROUNDSPACES/10);
-    ctx.fill();    
-    ctx.closePath();
+function drawGround(x, y){
+    for (let i = 0; i < NUMBLOCKS; i++) {
+        if(i === 0) ground.push(new Ground(x+(i*BLOCKSIZE), y, groundleft));
+        else if(i === NUMBLOCKS-1) ground.push(new Ground(x+(i*BLOCKSIZE), y, groundright));
+        else ground.push(new Ground(x+(i*BLOCKSIZE), y, groundcenter));
+    }
 }
 
 //outros valores para melhorar um pouquinho a capacidade
 let posinfoplayer = canvas.width/2 - Math.floor(canvas.width/6);
 let posinfoenemy = canvas.width/2 + Math.floor(canvas.width/6);
 let infoy = canvas.height-(canvas.width/10)
+
 
 //desenhar a bolinha, nome e %
 function drawFighterInfo(text, x, y, color, size){
@@ -140,10 +162,11 @@ function drawFighterInfo(text, x, y, color, size){
 let player;
 let particles;
 let enemy;
-
+let ground;
 
 function init(){
     particles = [];
+    ground = [];
 
     player = new Fighter(
         canvas.width/2 - Math.floor(canvas.width/6), canvas.height/2, 
@@ -158,15 +181,18 @@ function init(){
     player.sword.other = enemy;
     enemy.sword.other = player;
 
-    drawGround();
+    drawGround(GROUNDSPACES, GROUNDHEIGHT);
 }
 
 function update(){
     ctx.clearRect(0,0,canvas.width, canvas.height);
+    ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
     
-    drawGround();
+    // drawGround();
 
     player.update();
+
+    ground.forEach(g => g.draw());
 
     particles.forEach((part, parti) => {
         if(part.ttl < 50){
@@ -187,7 +213,10 @@ function update(){
 
 
     if(!pause){   
+        
         requestAnimationFrame(update);
+    } else {
+        writeTextCanvas('Pause. Click Enter', 2, 15, 'red', 15);
     };
 }
 
