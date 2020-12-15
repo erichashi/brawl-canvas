@@ -41,8 +41,13 @@ const JUMP = Math.floor(SPEED*2.5);
 //     update();
 // } )
 
+//Sounds
+let applause = new Audio("/sounds/applause.wav");
+let explosion = new Audio("/sounds/explosion.wav");
+let jab = new Audio("/sounds/jab.wav");
 
 // input do teclado
+let keys = [];
 document.addEventListener('keydown', e =>{
     if(e.keyCode == 13){
         pause = !pause;
@@ -55,6 +60,7 @@ document.addEventListener('keydown', e =>{
 addEventListener('keyup', (e) => {
     if((e.keyCode === 39 || e.keyCode === 37) && !player.disablemove)
         player.vel.x = 0;
+
 })
 
 

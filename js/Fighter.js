@@ -30,7 +30,7 @@ function Fighter(x, y, color, ai=false){
     this.disablemove = false;
 
     this.keyMove = (keyCode) => {
-
+       
         switch(keyCode){
             case 39:
                 //right
@@ -103,7 +103,7 @@ function Fighter(x, y, color, ai=false){
     this.update = () => {        
         if(ai && !this.disablemove){
             this.playAi();
-        }
+        } 
 
         //Checar colisão com o chão
         if(touchGround(this.x, this.y, this.vel, this.radius)){
@@ -169,6 +169,8 @@ function Fighter(x, y, color, ai=false){
     this.getDammaged = (dir) => {
         //se não está no tempo de regeneração 
         if(this.ttr < TIMETORESPAWN){
+
+            jab.play();
 
             //dir determina a direção do coice
             if(dir === "R"){

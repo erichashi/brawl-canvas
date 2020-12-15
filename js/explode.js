@@ -28,6 +28,8 @@ function Particle(x, y, radius, color, vel){
 //Algoritmo não ideal para explosão
 //TODO: deixar o algoritmo mais leve
 function explode(x, y, num, color){
+    explosion.play();
+    applause.play();
 
     //Fatores para incrementar no random
     let fact1 = 0
