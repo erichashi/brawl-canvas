@@ -1,0 +1,175 @@
+*{
+    font-family: 'Raleway';
+}
+
+body{
+    margin: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: orange;
+
+    overscroll-behavior: contain;
+    touch-action: manipulation;
+}
+
+
+.hidden {
+    display: none;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#main-page h1 {
+    font-size: xxx-large;
+    text-transform: uppercase;
+    color: white;
+    margin-top: -10%;
+}
+
+button {
+    border: none;
+    font-size: xx-large;
+    cursor: pointer;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    background: white;
+    color: orange;
+    border-radius: 7px;
+    padding: 10px 25px;
+
+}
+
+.container .radio-container {
+    display: inline-block;
+    margin-bottom: 10%;
+}
+
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 30vw;
+    height: 2vh;
+    background: #c8c8c8;
+    outline: none;
+    border: 2px solid white;
+    border-radius: 8px;
+}
+  
+  
+/* for chrome/safari */
+input[type="range"]::-webkit-slider-thumb {
+-webkit-appearance: none;
+    appearance: none;
+    width: 4vh;
+    height: 4vh;
+    background: white;
+    cursor: pointer;
+    border-radius: 50%;
+    /* border: 5px solid white; */
+}
+  
+/* for firefox */
+input[type="range"]::-moz-range-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #c8c8c8;
+    cursor: pointer;
+    border: 5px solid white;
+    border-radius: 4px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.color-span {
+    display: inline-block;
+    width: 4vw;
+    height: 4vw;
+    max-width: 50px;
+    max-height: 50px;
+    margin: 4px;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 5px solid white;
+    transition: all .3s;
+}
+
+#colors-radio input[type="radio"]:checked + label span {
+    border: 5px solid black;
+}
+
+input[type="range"]:focus {
+    outline: none;
+}
+
+#bg-radio label span{
+    display: inline-block;
+    width: 30vw;
+    height: 20vw;
+    margin: 4px;
+    cursor: pointer;
+    border: 5px solid white;
+    transition: all .3s;
+}
+
+#bg-radio label span img {
+    width: 100%;
+    height: 100%;
+}
+
+
+#bg-radio input[type="radio"]:checked + label span {
+    border: 5px solid black;
+
+}
+
+img {
+    max-width: 50vw;
+}
+
+#fightersinfo-container{
+    position: absolute;
+    bottom: 7%;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    font-size: 3vw;
+}
+
+#controlers-container{
+    position: absolute;
+    bottom: 10%;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+#joyatack{
+    background: #c8c8c8;
+    border-radius: 50%;
+    width: 15vw;
+    height: 15vw;
+    margin: 1rem;
+    transition: all .1s;
+}
+
+#joyatack:focus{
+    background: #c0c0c0;
+}
+

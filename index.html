@@ -4,50 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brawl</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <style>
-            
-        body{
-            margin: 0;
-            position: absolute;
-            width: 100%;
-            height: 100%;
+    <link rel="stylesheet" href="static/styles.css">
 
-            background-color: lightgreen;
-
-            overscroll-behavior: contain;
-            touch-action: manipulation;
-        }
-
-        div {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            margin-top: 5%;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-
-    </style>    
+    <link rel="icon" type="image/png" href="static/icon.png"/>
+    
 </head>
 <body>
-    <div>
-        <!-- <canvas id="canvas"></canvas> -->
-        <canvas id="canvas" style="border: 1px solid black"> </canvas>
+    <div class="container" id="main-page">
+        <h1 >Brawl</h1>
+        <button onclick="nextMain()"><i class="fa fa-arrow-right"></i></button>
+        <!-- <p style="color: white;margin-top: 2%; font-size: small; position: absolute; margin-top: 25%;">Aperte F11 para tela cheia</p> -->
     </div>
 
-    <img src="assets/BG.png" class="hidden" id="bg" alt="">
-    <img src="assets/1.png" class="hidden" id="groundleft" alt="">
-    <img src="assets/2.png" class="hidden" id="groundcenter" alt="">
-    <img src="assets/3.png" class="hidden" id="groundright" alt="">
+    <div class="container" id="choose-color" style="display: none;"> 
+
+        <div class="radio-container" id="colors-radio">    
+            
+            <input type="radio" name="color" value="Red" id="color-1">
+            <label for="color-1"><span class="color-span" style="background-color: Red;"></span></label>
+            
+            <input type="radio" name="color" value="Orange" id="color-2">
+            <label for="color-2"><span class="color-span" style="background-color: orange;"></span></label>
+            
+            <input type="radio" name="color" value="Yellow" id="color-3">
+            <label for="color-3"><span class="color-span" style="background-color: Yellow;"></span></label>
+
+            
+            <input type="radio" name="color" value="greenyellow" id="color-4">
+            <label for="color-4"><span class="color-span" style="background-color: greenyellow;"></span></label>
+            
+            <input type="radio" name="color" value="Blue" id="color-5">
+            <label for="color-5"><span class="color-span" style="background-color: blue;"></span></label>
+            
+            <input type="radio" name="color" value="Purple" id="color-6">
+            <label for="color-6"><span class="color-span" style="background-color: purple;"></span></label>
+
+        </div>
+
+        <div class="radio-container" id="numfighters" style="">
+            <input type="range" min="2" max="5" value="2">
+        </div>
+        
     
-    <script src="js/explode.js"></script>
-    <script src="js/Sword.js"></script>
-    <script src="js/Fighter.js"></script>
-    <script src="index.js"></script>
+        <button id="color-button" disabled style="opacity: .3;" onclick="nextColor()"><i class="fa fa-arrow-right"></i></button>
+    </div>
+    
+    <div class="container" id="choose-arena" style="display: none;">
+
+        <div class="radio-container" id="bg-radio">
+
+            <input type="radio" name="bg" value="forest" id="bg-1">
+            <label for="bg-1">
+                <span>
+                    <img src="assets/img/forest/BG.png">
+                </span>
+            </label>
+            
+            <input type="radio" name="bg" value="winter" id="bg-2">
+            <label for="bg-2">
+                <span>
+                    <img src="assets/img/winter/BG.png">
+                </span>
+            </label>
+        </div>
+        
+        <button id="arena-button" disabled style="opacity: .3;" onclick="nextArena()"><i class="fa fa-arrow-right" ></i></button>
+
+
+    </div>
+
+    <div class="container" id="tutorial" style="display: none;">
+        <img src="static/kb.png">
+        <button style="margin-top: 5%;" onclick="play()"><i class="fa fa-trophy"></i></button>
+    </div>
+
+    
+    <div class="container" id="canvas-container" style="display: none; width: auto;">
+
+        <div style="position: absolute; top: 1.5%;
+        left: 1.5%;">
+            <button style="padding: revert;" onclick="returnMainPage()"><i class="fa fa-arrow-left"></i></button>
+        </div>
+
+        <canvas id="canvas" style="border: 1px dashed #c5c5c5;"></canvas>
+
+        <div id="fightersinfo-container"></div>
+
+        <div id="controlers-container">
+            <div id="joymove-container" style="width:20vw; 
+            height:20vw;"></div>
+            <div id="joyatack"></div>
+        </div>
+    </div>
+
+
+    <script src="src/Constants.js"></script>
+    
+    <script src="src/explode.js"></script>
+    <script src="src/Sword.js"></script>
+    <script src="src/Fighter.js"></script>
+    <script src="src/Ground.js"></script> 
+    <script src="src/EventHandlers.js"></script>
+    <script src="src/utils.js"></script>
+
+    <script src="src/ChoosePage.js"></script>
+    <script src="src/joy.js"></script>
+
+
+    <script src="main.js"></script>
     
 </body>
 </html>

@@ -1,11 +1,14 @@
 # Brawl
+## A web-based brawl fight game built with JavaScript and HTML5 Canvas tag   
+You can play at [Bandcode](http://bandcode.colband.net.br/), the programming club @ [Colband](http://colband.net.br/) 
 
-Controle com as setas do teclado.  
-Clique SPACE para atacar.  
-Clique ENTER para começar e pausar.  
+### Features
+- Cool UI: select the background, oponents, color
+- Responsive app: play on different devices 
 
-![alt text](https://github.com/abac-axi/brawl-canvas/blob/main/game.png?raw=true)
 
-### TODO:
-- melhorar explode.js
-- melhor interface de inicio
+### Play
+- PC: use the arrow keys and space bar
+- Mobile: use the JoyStick
+
+![landing image](https://github.com/erichashi/brawl-canvas/blob/main/thumb.png?raw=true)

@@ -4,18 +4,21 @@ function Particle(x, y, radius, color, vel){
     this.radius = radius;
     this.color = color;
     this.vel = vel;
-
+    
     //time to live
     this.ttl =0;
+
+    this.remove = false;
 
     this.update = function(){
         this.x += this.vel.x;
         this.y += this.vel.y;
         this.ttl++;
-        this.draw();
+        if(this.ttl > 50) this.remove = true;
+        this.render();
     }
 
-    this.draw = () => {
+    this.render = () => {
         ctx.beginPath();
         ctx.fillStyle = this.color;
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
@@ -28,8 +31,11 @@ function Particle(x, y, radius, color, vel){
 //Algoritmo não ideal para explosão
 //TODO: deixar o algoritmo mais leve
 function explode(x, y, num, color){
-    explosion.play();
-    applause.play();
+
+    gSounds['explosion'].currentTime = 0;
+    gSounds['applause'].currentTime = 0;
+    gSounds['explosion'].play();
+    gSounds['applause'].play();
 
     //Fatores para incrementar no random
     let fact1 = 0
